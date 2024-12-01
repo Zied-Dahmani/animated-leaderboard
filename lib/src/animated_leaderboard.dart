@@ -3,6 +3,7 @@ import 'package:animated_leaderboard/src/silver_header_delegate.dart';
 import 'package:animated_leaderboard/src/top_ranked_user.dart';
 import 'package:flutter/material.dart';
 
+// TODO: documentation
 class AnimatedLeaderboard extends StatelessWidget {
   final ScrollController _scrollController;
   final double _topContainer;
@@ -12,15 +13,38 @@ class AnimatedLeaderboard extends StatelessWidget {
   final List<dynamic> _users;
   final dynamic _myId;
   final bool _isFirstFilterSelected;
-  final ValueChanged<bool> _filterTapCallBack;
+  final ValueChanged<bool>? _filterTapCallBack;
 
-  const AnimatedLeaderboard(this._scrollController, this._topContainer, this._filterLabel1, this._filterLabel2, this._users, this._myId, this._isFirstFilterSelected, this._filterTapCallBack, [this._radius = 20]) : super(key: null);
+  const AnimatedLeaderboard({
+    required ScrollController scrollController,
+    required double topContainer,
+    required String filterLabel1,
+    required String filterLabel2,
+    required List<dynamic> users,
+    required dynamic myId,
+    required bool isFirstFilterSelected,
+    ValueChanged<bool>? filterTapCallBack,
+    double radius = 20,
+  })  : _scrollController = scrollController,
+        _topContainer = topContainer,
+        _filterLabel1 = filterLabel1,
+        _filterLabel2 = filterLabel2,
+        _users = users,
+        _myId = myId,
+        _isFirstFilterSelected = isFirstFilterSelected,
+        _filterTapCallBack = filterTapCallBack,
+        _radius = radius,
+        super(key: null);
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
+
+    if(_users.isEmpty) {
+      return const SizedBox.shrink();
+    }
 
     return CustomScrollView(
       controller: _scrollController,
@@ -96,9 +120,7 @@ class AnimatedLeaderboard extends StatelessWidget {
                     2,
                         (int index) => Expanded(
                       child: GestureDetector(
-                        onTap: () {
-                          _filterTapCallBack(index == 0);
-                        },
+                        onTap: () => _filterTapCallBack?.call(index == 0),
                         child: Container(
                           padding: const EdgeInsets.all(
                             10,
@@ -114,7 +136,7 @@ class AnimatedLeaderboard extends StatelessWidget {
                           child: Text(
                             index == 0 ? _filterLabel1 : _filterLabel2,
                             textAlign: TextAlign.center,
-                            style: theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700, color: (index == 0 && _isFirstFilterSelected) || (index == 1 && !_isFirstFilterSelected) ? theme.colorScheme.onSecondary : theme.colorScheme.onSurface),
+                            style: theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700, color: (index == 0 && _isFirstFilterSelected) || (index == 1 && !_isFirstFilterSelected) ? theme.colorScheme.onSecondary : theme.colorScheme.secondary),
                           ),
                         ),
                       ),
