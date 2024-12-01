@@ -9,7 +9,10 @@ class LeaderboardCard extends StatelessWidget {
   final bool _isFirstFilterSelected;
   final Function? _callBack;
 
-  const LeaderboardCard(this._radius, this._rank, this._user, this._myId, this._isFirstFilterSelected, [this._callBack]) : super(key: null);
+  const LeaderboardCard(this._radius, this._rank, this._user, this._myId,
+      this._isFirstFilterSelected,
+      [this._callBack])
+      : super(key: null);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,9 @@ class LeaderboardCard extends StatelessWidget {
     return GestureDetector(
       onTap: _user.id != _myId ? _callBack?.call() : null,
       child: Card(
-        color: _user.id == _myId ? theme.colorScheme.primary.withOpacity(.2) : theme.colorScheme.onSurface,
+        color: _user.id == _myId
+            ? theme.colorScheme.primary.withOpacity(.2)
+            : theme.colorScheme.onSurface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(_radius),
         ),
@@ -30,7 +35,8 @@ class LeaderboardCard extends StatelessWidget {
             children: <Widget>[
               Text(
                 _rank.toString(),
-                style: theme.textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w700),
+                style: theme.textTheme.bodyMedium!
+                    .copyWith(fontWeight: FontWeight.w700),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -45,14 +51,17 @@ class LeaderboardCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   '${_user.firstName} ${_user.lastName}',
-                  style: theme.textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w700),
+                  style: theme.textTheme.bodyMedium!
+                      .copyWith(fontWeight: FontWeight.w700),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
               const SizedBox(width: 10),
               Text(
                 '${_isFirstFilterSelected ? _user.firstFilterPoints : _user.secondFilterPoints} pts',
-                style: theme.textTheme.bodyMedium!.copyWith(fontWeight: _user.id == _myId ? FontWeight.w700 : FontWeight.w400),
+                style: theme.textTheme.bodyMedium!.copyWith(
+                    fontWeight:
+                        _user.id == _myId ? FontWeight.w700 : FontWeight.w400),
               ),
             ],
           ),

@@ -12,7 +12,10 @@ class TopRankedUser extends StatelessWidget {
   final bool _isFirstFilterSelected;
   final Function? _callBack;
 
-  const TopRankedUser(this._radius, this._rank, this._user, this._myId, this._isFirstFilterSelected, [this._callBack, this._crownColor = Colors.lightBlue]) : super(key: null);
+  const TopRankedUser(this._radius, this._rank, this._user, this._myId,
+      this._isFirstFilterSelected,
+      [this._callBack, this._crownColor = Colors.lightBlue])
+      : super(key: null);
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +34,13 @@ class TopRankedUser extends StatelessWidget {
                   colorFilter: ColorFilter.mode(_crownColor, BlendMode.srcIn),
                   width: 34,
                   height: 34,
-                ).animate(
+                )
+                    .animate(
                   delay: 1000.ms,
-                  onPlay: (AnimationController controller) => controller.repeat(),
-                ).shimmer(
+                  onPlay: (AnimationController controller) =>
+                      controller.repeat(),
+                )
+                    .shimmer(
                   delay: 1000.ms,
                   duration: 2000.ms,
                   stops: <double>[0, 0.5, 1],
@@ -62,15 +68,21 @@ class TopRankedUser extends StatelessWidget {
                     backgroundColor: theme.colorScheme.primary,
                     child: Text(
                       _rank.toString(),
-                      style: theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.onPrimary, fontWeight: FontWeight.w700),
+                      style: theme.textTheme.bodyLarge!.copyWith(
+                          color: theme.colorScheme.onPrimary,
+                          fontWeight: FontWeight.w700),
                     ),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 16),
-            Text(_user.firstName.split(' ').first, style: theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700)),
-            Text('${_isFirstFilterSelected ? _user.firstFilterPoints : _user.secondFilterPoints} pts', style: theme.textTheme.bodyLarge),
+            Text(_user.firstName.split(' ').first,
+                style: theme.textTheme.bodyLarge!
+                    .copyWith(fontWeight: FontWeight.w700)),
+            Text(
+                '${_isFirstFilterSelected ? _user.firstFilterPoints : _user.secondFilterPoints} pts',
+                style: theme.textTheme.bodyLarge),
           ],
         ),
       ),

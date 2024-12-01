@@ -3,6 +3,7 @@ import 'package:animated_leaderboard/src/silver_header_delegate.dart';
 import 'package:animated_leaderboard/src/top_ranked_user.dart';
 import 'package:flutter/material.dart';
 
+// TODO: Implement sorting functionality here
 class AnimatedLeaderboard extends StatelessWidget {
   final ScrollController _scrollController;
   final double _topContainer;
@@ -44,7 +45,7 @@ class AnimatedLeaderboard extends StatelessWidget {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
-    if(_users.isEmpty) {
+    if (_users.isEmpty) {
       return const SizedBox.shrink();
     }
 
@@ -67,31 +68,16 @@ class AnimatedLeaderboard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       TopRankedUser(
-                        _radius,
-                        2,
-                        _users[1],
-                        _myId,
-                        _isFirstFilterSelected
-                      ),
+                          _radius, 2, _users[1], _myId, _isFirstFilterSelected),
                       Padding(
                         padding: const EdgeInsets.only(
                           bottom: 16,
                         ),
-                        child: TopRankedUser(
-                            _radius,
-                            1,
-                            _users.first,
-                            _myId,
-                            _isFirstFilterSelected
-                        ),
+                        child: TopRankedUser(_radius, 1, _users.first, _myId,
+                            _isFirstFilterSelected),
                       ),
                       TopRankedUser(
-                          _radius,
-                          3,
-                          _users[2],
-                          _myId,
-                          _isFirstFilterSelected
-                      ),
+                          _radius, 3, _users[2], _myId, _isFirstFilterSelected),
                     ],
                   ),
                 ),
@@ -106,16 +92,10 @@ class AnimatedLeaderboard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: theme.colorScheme.surface,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(
-                      _topContainer > .6
-                        ? _radius * 2
-                        : 0
-                    ),
-                    topRight: Radius.circular(
-                      _topContainer > .6
-                        ? _radius * 2
-                        : 0
-                    ),
+                    topLeft:
+                        Radius.circular(_topContainer > .6 ? _radius * 2 : 0),
+                    topRight:
+                        Radius.circular(_topContainer > .6 ? _radius * 2 : 0),
                   ),
                 ),
                 child: Container(
@@ -131,7 +111,7 @@ class AnimatedLeaderboard extends StatelessWidget {
                   child: Row(
                     children: List<Widget>.generate(
                       2,
-                          (int index) => Expanded(
+                      (int index) => Expanded(
                         child: GestureDetector(
                           onTap: () => _onFilterTap(index == 0),
                           child: Container(
@@ -139,7 +119,8 @@ class AnimatedLeaderboard extends StatelessWidget {
                               10,
                             ),
                             decoration: BoxDecoration(
-                              color: (index == 0 && _isFirstFilterSelected) || (index == 1 && !_isFirstFilterSelected)
+                              color: (index == 0 && _isFirstFilterSelected) ||
+                                      (index == 1 && !_isFirstFilterSelected)
                                   ? theme.colorScheme.secondary
                                   : theme.colorScheme.onSurface,
                               borderRadius: BorderRadius.all(
@@ -149,7 +130,14 @@ class AnimatedLeaderboard extends StatelessWidget {
                             child: Text(
                               index == 0 ? _filterLabel1 : _filterLabel2,
                               textAlign: TextAlign.center,
-                              style: theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w700, color: (index == 0 && _isFirstFilterSelected) || (index == 1 && !_isFirstFilterSelected) ? theme.colorScheme.onSecondary : theme.colorScheme.secondary),
+                              style: theme.textTheme.bodyLarge!.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  color:
+                                      (index == 0 && _isFirstFilterSelected) ||
+                                              (index == 1 &&
+                                                  !_isFirstFilterSelected)
+                                          ? theme.colorScheme.onSecondary
+                                          : theme.colorScheme.secondary),
                             ),
                           ),
                         ),
@@ -178,16 +166,16 @@ class AnimatedLeaderboard extends StatelessWidget {
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: _topContainer > .3 ? _users.length : _users.length - 3,
+                itemCount:
+                    _topContainer > .3 ? _users.length : _users.length - 3,
                 itemBuilder: (BuildContext context, int index) {
                   return LeaderboardCard(
-                    _radius,
-                    _topContainer > .3 ? index + 1 : index + 4,
-                    _users[_topContainer > .3 ? index : index + 3],
-                    _myId,
-                    _isFirstFilterSelected,
-                      _onUserCardTap
-                  );
+                      _radius,
+                      _topContainer > .3 ? index + 1 : index + 4,
+                      _users[_topContainer > .3 ? index : index + 3],
+                      _myId,
+                      _isFirstFilterSelected,
+                      _onUserCardTap);
                 },
               ),
             ),
