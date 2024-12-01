@@ -13,7 +13,8 @@ class AnimatedLeaderboard extends StatelessWidget {
   final List<dynamic> _users;
   final dynamic _myId;
   final bool _isFirstFilterSelected;
-  final ValueChanged<bool>? _filterTapCallBack;
+  final ValueChanged<bool> _onFilterTap;
+  final Function? _onUserCardTap;
 
   const AnimatedLeaderboard({
     required ScrollController scrollController,
@@ -23,8 +24,9 @@ class AnimatedLeaderboard extends StatelessWidget {
     required List<dynamic> users,
     required dynamic myId,
     required bool isFirstFilterSelected,
-    ValueChanged<bool>? filterTapCallBack,
+    required ValueChanged<bool> onFilterTap,
     double radius = 20,
+    Function? onUserCardTap,
   })  : _scrollController = scrollController,
         _topContainer = topContainer,
         _filterLabel1 = filterLabel1,
@@ -32,8 +34,9 @@ class AnimatedLeaderboard extends StatelessWidget {
         _users = users,
         _myId = myId,
         _isFirstFilterSelected = isFirstFilterSelected,
-        _filterTapCallBack = filterTapCallBack,
+        _onFilterTap = onFilterTap,
         _radius = radius,
+        _onUserCardTap = onUserCardTap,
         super(key: null);
 
   @override
@@ -101,8 +104,16 @@ class AnimatedLeaderboard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: theme.colorScheme.surface,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(_radius * 2),
-                  topRight: Radius.circular(_radius * 2),
+                  topLeft: Radius.circular(
+                    _topContainer > .6
+                      ? _radius * 2
+                      : 0
+                  ),
+                  topRight: Radius.circular(
+                    _topContainer > .6
+                      ? _radius * 2
+                      : 0
+                  ),
                 ),
               ),
               child: Container(
@@ -120,7 +131,7 @@ class AnimatedLeaderboard extends StatelessWidget {
                     2,
                         (int index) => Expanded(
                       child: GestureDetector(
-                        onTap: () => _filterTapCallBack?.call(index == 0),
+                        onTap: () => _onFilterTap(index == 0),
                         child: Container(
                           padding: const EdgeInsets.all(
                             10,
@@ -158,16 +169,8 @@ class AnimatedLeaderboard extends StatelessWidget {
             decoration: BoxDecoration(
               color: theme.colorScheme.surface,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(
-                  _topContainer > .6
-                      ? _radius * 2
-                      : 0,
-                ),
-                topRight: Radius.circular(
-                  _topContainer > .6
-                      ? _radius * 2
-                      : 0,
-                ),
+                topLeft: Radius.circular(_radius * 2),
+                topRight: Radius.circular(_radius * 2),
               ),
             ),
             child: ListView.builder(
@@ -180,7 +183,8 @@ class AnimatedLeaderboard extends StatelessWidget {
                   _topContainer > .3 ? index + 1 : index + 4,
                   _users[_topContainer > .3 ? index : index + 3],
                   _myId,
-                  _isFirstFilterSelected
+                  _isFirstFilterSelected,
+                    _onUserCardTap
                 );
               },
             ),
