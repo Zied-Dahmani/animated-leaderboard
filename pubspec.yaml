@@ -1,6 +1,6 @@
 name: animated_leaderboard
-description: "Animated Leaderboard"
-version: 0.1.2
+description: "An interactive animated leaderboard widget for Flutter apps."
+version: 0.1.3
 homepage: https://github.com/Zied-Dahmani/animated-leaderboard
 
 environment:
