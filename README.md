@@ -14,10 +14,12 @@ An interactive animated leaderboard widget for Flutter apps. This package allows
 
 Here are some screenshots of the `AnimatedLeaderboard` in action:
 
-![Leaderboard Screenshot](..%2FSimulator%20Screenshot%20-%20iPhone%2015%20Pro%20-%202024-12-01%20at%2023.12.32.png)
-![Leaderboard Screenshot](..%2FSimulator%20Screenshot%20-%20iPhone%2015%20Pro%20-%202024-12-01%20at%2023.13.01.png)
-![Leaderboard Screenshot](..%2FSimulator%20Screenshot%20-%20iPhone%2015%20Pro%20-%202024-12-01%20at%2023.12.41.png)
-![Leaderboard Screenshot](..%2FSimulator%20Screenshot%20-%20iPhone%2015%20Pro%20-%202024-12-01%20at%2023.16.01.png)
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://github.com/user-attachments/assets/d6a0cd59-059c-4b81-89f1-cfa425ec8382" width="200" />
+  <img src="https://github.com/user-attachments/assets/df08097a-3912-4e87-9698-e8bf99ad0e9f" width="200" />
+  <img src="https://github.com/user-attachments/assets/542140cf-27a3-4d4f-a4da-fec067d88af1" width="200" />
+  <img src="https://github.com/user-attachments/assets/bec609d7-1210-456b-828d-55740a74dd4a" width="200" />
+</div>
 
 ## Installation
 
